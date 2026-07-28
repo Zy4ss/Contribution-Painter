@@ -53,13 +53,23 @@
       <select id="selYear"></select>
       <div class="hint">The graph covers the entire selected year</div>
     </div>
+    <div class="field">
+      <label>GitHub Email</label>
+      <input type="text" id="gitEmail" placeholder="your@email.com">
+      <div class="hint">Must match your GitHub verified email for contributions to count</div>
+    </div>
+    <div class="field">
+      <label>GitHub Username</label>
+      <input type="text" id="gitName" placeholder="your-github-username">
+      <div class="hint">Used as commit author name</div>
+    </div>
   </div>
 
   <div class="card">
     <div class="card-title">Editor</div>
     <div class="legend">
       <span class="legend-label">Intensity:</span>
-      <div class="swatch" data-level="0" style="background:#161b22" title="Empty (0)"></div>
+      <div class="swatch" data-level="0" style="background:#21262d" title="Empty (0)"></div>
       <div class="swatch" data-level="1" style="background:#0e4429" title="Level 1"></div>
       <div class="swatch" data-level="2" style="background:#006d32" title="Level 2"></div>
       <div class="swatch" data-level="3" style="background:#26a641" title="Level 3"></div>
@@ -69,8 +79,8 @@
     </div>
     <div class="graph-wrap">
       <div class="day-labels">
-        <span>Mon</span><span></span><span>Wed</span><span></span>
-        <span>Fri</span><span></span><span></span>
+        <span></span><span>Mon</span><span></span><span>Wed</span>
+        <span></span><span>Fri</span><span></span>
       </div>
       <div class="graph-scroll">
         <div class="month-row" id="months"></div>
