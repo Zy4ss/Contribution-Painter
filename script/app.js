@@ -368,8 +368,9 @@ rollbackBtn.addEventListener('click', () => {
   bash += 'if [ "$CURRENT_BRANCH" != "main" ]; then\n';
   bash += '  git branch -M main\n';
   bash += "fi\n\n";
-  bash += 'echo "Force pushing to main..."\n';
-  bash += "git push -u origin main --force\n";
+  bash += 'echo "Force pushing to main & master..."\n';
+  bash += "git push -u origin main --force 2>/dev/null\n";
+  bash += "git push -u origin master --force 2>/dev/null\n";
   bash += "cd ..\n";
   bash += "rm -rf github_painter_undo_tmp\n";
   bash += "echo 'DONE!'\n";
