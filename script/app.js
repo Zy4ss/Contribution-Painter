@@ -105,9 +105,12 @@ function buildCalendar(year) {
       const date = new Date(year, 0, 1);
       date.setDate(date.getDate() + dayOffset);
 
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
       const cell = document.createElement('div');
       cell.className = 'cell';
-      cell.dataset.date = date.toISOString().slice(0, 10);
+      cell.dataset.date = `${y}-${m}-${dd}`;
       cell.dataset.level = '0';
       cell.style.background = LEVEL_COLORS[0];
       cell.style.gridColumn = week + 1;
