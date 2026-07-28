@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Contribution Painter</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <h1>GitHub Contribution Painter</h1>
+    <span class="badge">v2.0</span>
+  </div>
+  <div class="topbar-right">
+    <a class="profile-link" href="https://github.com/Zy4ss" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      Zy4ss
+    </a>
+  </div>
+</div>
+
+<div class="container">
+<div class="main">
+
+  <div class="card">
+    <div class="card-title">How to Use</div>
+    <div class="field">
+      <ol>
+        <li>Enter your GitHub repository URL as <code>https://github.com/YOUR_USER_NAME/YOUR_REPO_NAME</code></li>
+        <li>Select the year you want to use</li>
+        <li>Start drawing with click & drag on the graph</li>
+        <li>Click <code>"Download script →"</code></li>
+        <li>Go to the directory in your terminal where you downloaded the script</li>
+        <li>Run <code>chmod +x github_painter.sh && ./github_painter.sh</code></li>
+        <li>To undo, run <code>chmod +x github_painter_undo.sh && bash github_painter_undo.sh</code></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Repository & Year</div>
+    <div class="field">
+      <label>Repository</label>
+      <input type="text" id="repo" placeholder="username/repo-name">
+      <div class="hint">Must exist and have at least one commit (README).</div>
+    </div>
+    <div class="field">
+      <label>Year</label>
+      <select id="selYear"></select>
+      <div class="hint">The graph covers the entire selected year</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Editor</div>
+    <div class="legend">
+      <span class="legend-label">Intensity:</span>
+      <div class="swatch" data-level="0" style="background:#21262d" title="Empty (0)"></div>
+      <div class="swatch" data-level="1" style="background:#0D4429" title="Level 1"></div>
+      <div class="swatch" data-level="2" style="background:#016C31" title="Level 2"></div>
+      <div class="swatch" data-level="3" style="background:#26A641" title="Level 3"></div>
+      <div class="swatch sel" data-level="4" style="background:#39D353" title="Level 4"></div>
+      <div class="swatch" data-level="5" style="background:#f39c12" title="Random 0-4"></div>
+      <span class="legend-key">keys 0–5 &nbsp;|&nbsp; click and drag</span>
+    </div>
+    <div class="graph-wrap">
+      <div class="day-labels">
+        <span>Mon</span><span></span><span>Wed</span><span></span>
+        <span>Fri</span><span></span><span></span>
+      </div>
+      <div class="graph-scroll">
+        <div class="month-row" id="months"></div>
+        <div class="graph" id="graph"></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span>Days painted:</span> <b id="sDays">0</b></div>
+      <div class="stat"><span>Commits:</span> <b id="sCommits">0</b></div>
+      <div class="stat"><span>Period:</span> <b id="sPeriod">—</b></div>
+    </div>
+    <div class="btn-row">
+      <button class="danger" id="clearBtn">Clear</button>
+      <button id="fillBtn">Fill all</button>
+      <label class="fill-percent-control" for="fillPercent">
+        <span>Fill %</span>
+        <input id="fillPercent" type="text" value="100%" inputmode="decimal" aria-label="Fill percentage" />
+      </label>
+      <button class="primary" id="pushBtn">▶ Download Script</button>
+      <button id="rollbackBtn">↩ Download Rollback</button>
+    </div>
+    <div class="status-bar" id="statusBar"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <a class="footer-link star" href="https://github.com/readme-SVG/Contribution-Painter" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+        </svg>
+        <span>Star on GitHub</span>
+      </a>
+      <a class="footer-link" href="https://github.com/readme-SVG/Contribution-Painter/issues" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+          <path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/>
+        </svg>
+        <span>GitHub Issues</span>
+      </a>
+      <a class="footer-link" href="https://github.com/readme-SVG/Contribution-Painter/wiki" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M1.75 1h8.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0110.25 10H7.061l-2.574 2.573A1.458 1.458 0 012 11.543V10h-.25A1.75 1.75 0 010 8.25v-5.5C0 1.784.784 1 1.75 1zM1.5 2.75v5.5c0 .138.112.25.25.25h1a.75.75 0 01.75.75v2.19l2.72-2.72a.749.749 0 01.53-.22h3.5a.25.25 0 00.25-.25v-5.5a.25.25 0 00-.25-.25h-8.5a.25.25 0 00-.25.25zm13 2a.25.25 0 00-.25-.25h-.5a.75.75 0 010-1.5h.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0114.25 12H14v1.543a1.458 1.458 0 01-2.487 1.03L9.22 12.28a.749.749 0 111.06-1.06l2.22 2.22v-2.19a.75.75 0 01.75-.75h.25a.25.25 0 00.25-.25v-5.5z"/>
+        </svg>
+        readme-SVG / contribution-painter-wiki
+      </a>
+    </div>
+    <div class="footer-right">
+      <span class="footer-text">If this tool saved you time — a ⭐ means a lot!</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+  <script src="script/app.js"></script>
+</body>
+</html>
