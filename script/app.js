@@ -20,7 +20,7 @@ const swatches = document.querySelectorAll('.swatch');
 let selectedLevel = 4;
 let isDragging = false;
 
-const LEVEL_COLORS = ['#21262d','#0D4429','#016C31','#26A641','#39D353'];
+const LEVEL_COLORS = ['#161b22','#0e4429','#006d32','#26a641','#39d353'];
 
 (function initYearSelect() {
   for (let y = 2028; y >= 2015; y--) {
@@ -96,8 +96,8 @@ function buildCalendar(year) {
   const numWeeks = getNumberOfWeeks(year);
   const firstDayOffset = getFirstDayOfYear(year);
 
-  graphEl.style.gridTemplateColumns = `repeat(${numWeeks}, 13px)`;
-  monthsEl.style.gridTemplateColumns = `repeat(${numWeeks}, 13px)`;
+  graphEl.style.gridTemplateColumns = `repeat(${numWeeks}, 12px)`;
+  monthsEl.style.gridTemplateColumns = `repeat(${numWeeks}, 12px)`;
 
   for (let week = 0; week < numWeeks; week++) {
     for (let day = 0; day < 7; day++) {
